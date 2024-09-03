@@ -75,7 +75,13 @@ const Calendar = () => {
     style.textContent = `
       @page {
         size: landscape;
-        print-color-adjust: exact;
+      }
+      @media print {
+        body, html {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -98,7 +104,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white forced-color-adjust-none">
+    <div className="flex flex-col items-center p-4 bg-white h-screen">
       <div className="mb-4 print:hidden">
         <label htmlFor="year" className="mr-2 font-bold">
           Год:
@@ -132,7 +138,7 @@ const Calendar = () => {
         <span className="text-slate-700">{monthNames[month]}</span>
         <span className="text-slate-700">{year}</span>
       </div>
-      <div className="grid grid-cols-7 gap-1 w-full">
+      <div className="grid grid-cols-7 gap-1 w-full h-[calc(100%-3rem)] grid-rows-[min-content_auto]">
         {weekdays.map((day, index) => (
           <div
             key={day}
@@ -144,7 +150,7 @@ const Calendar = () => {
         {calendar.map((day, index) => (
           <div
             key={index}
-            className={`p-1 text-center h-16 flex text-xl rounded-lg ${colors[index % 7].border} border-2`}
+            className={`p-1 text-center h-16 flex text-xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
           >
             <span className="self-end justify-self-end ml-auto font-semibold text-slate-700">
               {day}
