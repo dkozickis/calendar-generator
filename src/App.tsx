@@ -142,7 +142,7 @@ const Calendar = () => {
         {weekdays.map((day, index) => (
           <div
             key={day}
-            className={`font-bold p-2 text-center rounded-lg ${colors[index].bg} text-white`}
+            className={`font-bold p-2 text-xl text-center rounded-lg ${colors[index].bg} text-white`}
           >
             {day}
           </div>
@@ -150,7 +150,7 @@ const Calendar = () => {
         {calendar.map((day, index) => (
           <div
             key={index}
-            className={`p-1 text-center h-16 flex text-xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
+            className={`p-1 text-center h-16 flex text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
           >
             <span className="self-end justify-self-end ml-auto font-semibold text-slate-700">
               {day}
