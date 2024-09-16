@@ -17,7 +17,7 @@ const weekdays = Array.from({ length: 7 }, (_, i) => {
 export const MonthlyCalendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
-  const [calendar, setCalendar] = useState<(number | null)[]>(() =>
+  const [calendar, setCalendar] = useState<(Date | null)[]>(() =>
     generateCalendar({ year, month }),
   );
 

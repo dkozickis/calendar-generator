@@ -30,11 +30,11 @@ export const DaySquare = ({
   day: Date | null;
 }) => (
   <div
-    className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
+    className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full dayContainer`}
   >
     {day ? (
       <>
-        <input className="w-full h-full p-2 text-5xl" />
+        <input className="w-full h-full p-2 dayContainerChild" />
         <span className="right-2 bottom-2 absolute font-semibold text-slate-700">
           {day?.getDate()}
         </span>
