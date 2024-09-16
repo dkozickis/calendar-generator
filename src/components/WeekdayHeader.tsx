@@ -1,3 +1,6 @@
+import { useLocalStorage } from "../utils/hooks.ts";
+import { ChangeEvent } from "react";
+
 const colors = [
   { bg: "bg-[#5DADE2]", border: "border-[#5DADE2]" },
   { bg: "bg-[#FF7E67]", border: "border-[#FF7E67]" },
@@ -28,17 +31,33 @@ export const DaySquare = ({
 }: {
   index: number;
   day: Date | null;
-}) => (
-  <div
-    className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full dayContainer`}
-  >
-    {day ? (
-      <>
-        <input className="w-full h-full p-2 dayContainerChild" />
-        <span className="right-2 bottom-2 absolute font-semibold text-slate-700">
-          {day?.getDate()}
-        </span>
-      </>
-    ) : null}
-  </div>
-);
+}) => {
+  const storageKey = day
+    ? `day_${day.getFullYear()}_${day.getMonth() + 1}_${day.getDate()}`
+    : "";
+
+  const [inputValue, setInputValue] = useLocalStorage(storageKey, "");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <div
+      className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full dayContainer`}
+    >
+      {day ? (
+        <>
+          <input
+            className="w-full h-full p-2 dayContainerChild"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <span className="right-2 bottom-2 absolute font-semibold text-slate-700">
+            {day.getDate()}
+          </span>
+        </>
+      ) : null}
+    </div>
+  );
+};
