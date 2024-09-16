@@ -75,7 +75,12 @@ export const MonthlyCalendar = () => {
           </WeekdayHeader>
         ))}
         {calendar.map((day, index) => (
-          <DaySquare key={index} index={index} day={day} />
+          <DaySquare
+            key={index}
+            index={index}
+            day={day}
+            keyPrefix={"monthly-calendar"}
+          />
         ))}
       </div>
     </div>
