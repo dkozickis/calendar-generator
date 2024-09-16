@@ -1,5 +1,5 @@
 import { useLocalStorage } from "../utils/hooks.ts";
-import { ChangeEvent } from "react";
+import { ChangeEvent, PropsWithChildren } from "react";
 
 const colors = [
   { bg: "bg-[#5DADE2]", border: "border-[#5DADE2]" },
@@ -12,29 +12,30 @@ const colors = [
 ];
 
 export const WeekdayHeader = ({
-  day,
+  children,
   index,
-}: {
+}: PropsWithChildren<{
   index: number;
-  day: string;
-}) => (
+}>) => (
   <div
     className={`font-bold p-2 text-xl text-center rounded-lg ${colors[index].bg} text-white capitalize`}
   >
-    {day}
+    {children}
   </div>
 );
 
 export const DaySquare = ({
   day,
   index,
+  keyPrefix,
 }: {
-  index: number;
   day: Date | null;
+  index: number;
+  keyPrefix: string;
 }) => {
   const storageKey = day
-    ? `day_${day.getFullYear()}_${day.getMonth() + 1}_${day.getDate()}`
-    : "";
+    ? `${keyPrefix}_day_${day.getFullYear()}_${day.getMonth() + 1}_${day.getDate()}`
+    : keyPrefix;
 
   const [inputValue, setInputValue] = useLocalStorage(storageKey, "");
 
@@ -44,15 +45,15 @@ export const DaySquare = ({
 
   return (
     <div
-      className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full dayContainer`}
+      className={`p-1 h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full dayContainer`}
     >
+      <input
+        className="w-full h-full p-2 dayContainerChild text-center"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
       {day ? (
         <>
-          <input
-            className="w-full h-full p-2 dayContainerChild"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
           <span className="right-2 bottom-2 absolute font-semibold text-slate-700">
             {day.getDate()}
           </span>

@@ -13,3 +13,16 @@ body {
 .dayContainerChild {
   font-size: clamp(1rem, 30cqi, 16rem);
 }
+
+@page {
+  size: landscape;
+}
+
+@media print {
+  body,
+  html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}

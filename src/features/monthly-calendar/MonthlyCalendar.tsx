@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { generateCalendar } from "../../utils/calendar.ts";
 import { DaySquare, WeekdayHeader } from "../../components/WeekdayHeader.tsx";
 
@@ -20,28 +20,6 @@ export const MonthlyCalendar = () => {
   const [calendar, setCalendar] = useState<(Date | null)[]>(() =>
     generateCalendar({ year, month }),
   );
-
-  useEffect(() => {
-    // Set print orientation to landscape
-    const style = document.createElement("style");
-    style.textContent = `
-      @page {
-        size: landscape;
-      }
-      @media print {
-        body, html {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
 
   const handleYearChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const newYear = parseInt(e.target.value);
@@ -92,7 +70,9 @@ export const MonthlyCalendar = () => {
       </div>
       <div className="grid grid-cols-7 gap-1 w-full h-[calc(100%-3rem)] grid-rows-[min-content_auto]">
         {weekdays.map((day, index) => (
-          <WeekdayHeader key={day} index={index} day={day} />
+          <WeekdayHeader key={day} index={index}>
+            {day}
+          </WeekdayHeader>
         ))}
         {calendar.map((day, index) => (
           <DaySquare key={index} index={index} day={day} />
