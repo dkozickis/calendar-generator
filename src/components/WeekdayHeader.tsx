@@ -27,13 +27,18 @@ export const DaySquare = ({
   index,
 }: {
   index: number;
-  day: number | null;
+  day: Date | null;
 }) => (
   <div
-    className={`p-1 text-center h-16 flex text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
+    className={`p-1 text-center h-16 relative text-2xl rounded-lg ${colors[index % 7].border} border-2 h-full`}
   >
-    <span className="self-end justify-self-end ml-auto font-semibold text-slate-700">
-      {day}
-    </span>
+    {day ? (
+      <>
+        <input className="w-full h-full p-2 text-5xl" />
+        <span className="right-2 bottom-2 absolute font-semibold text-slate-700">
+          {day?.getDate()}
+        </span>
+      </>
+    ) : null}
   </div>
 );
