@@ -58,7 +58,7 @@ export const WeeklyCalendar = () => {
                 key={i}
                 index={i}
                 day={null}
-                keyPrefix={`weekly-calendar-${name}-${i}`}
+                keyPrefix={`weekly-calendar-${dayCount}-${name}-${i}`}
               />
             ))}
           </>
